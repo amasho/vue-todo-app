@@ -6,8 +6,8 @@
       class="task-list__item"
       :class="{ 'task-list__item--checked': todo.done }"
     >
-      <input v-model="todo.done" type="checkbox" />
-      <input v-model="todo.editing" type="checkbox" />
+      <input v-model="todo.done" type="checkbox" title="done" />
+      <input v-model="todo.editing" type="checkbox" title="edit" />
       <input v-if="todo.editing" v-model="todo.text" @keyup.enter="todo.editing = !todo.editing" />
       <span v-else>{{ todo.text }}</span>
     </label>
