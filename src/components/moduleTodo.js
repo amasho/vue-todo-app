@@ -1,22 +1,9 @@
+import api from '@/api'
+
 const moduleTodo = {
   namespaced: true,
   state: {
-    todos: [{
-      id: 1,
-      text: 'todo1',
-      done: false
-    },
-    {
-      id: 2,
-      text: 'todo2',
-      done: false
-    },
-    {
-      id: 3,
-      text: 'todo3',
-      done: false
-    }
-    ],
+    todos: api.read(),
     newTodo: '',
     showTodo: 'all'
   },
@@ -30,11 +17,13 @@ const moduleTodo = {
         return
       }
       const id = state.todos.slice(-1)[0].id + 1
-      state.todos.push({
+      const data = {
         id: id,
         text: text,
         done: false
-      })
+      }
+      state.todos.push(data)
+      api.add(data)
       state.newTodo = ''
     },
     removeTodo: function (state) {
