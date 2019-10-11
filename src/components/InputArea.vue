@@ -11,11 +11,13 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('todo')
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'InputArea',
   computed: {
+    todos () {
+      return this.$store.state.todos
+    },
     ...mapState(['todos', 'newTodo']),
     inputValue: {
       get () {
@@ -26,8 +28,14 @@ export default {
       }
     }
   },
+  async mounted () {
+    this.$store.dispatch('getTodos')
+  },
   methods: {
-    ...mapMutations(['input', 'addTodo', 'removeTodo'])
+    ...mapMutations(['input', 'removeTodo']),
+    addTodo () {
+      this.$store.dispatch('addTodo')
+    }
   }
 }
 </script>

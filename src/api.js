@@ -1,8 +1,9 @@
 import axios from 'axios'
 
+axios.defaults.baseURL = 'http://localhost:3000'
+
 const api = {
   async read () {
-    axios.defaults.baseURL = 'http://localhost:3000'
     try {
       const res = await axios.get('/todos')
       return res.data
@@ -11,10 +12,13 @@ const api = {
     }
   },
   async add (value) {
-    axios.defaults.baseURL = 'http://localhost:3000'
-    axios.post('/todos', value).then(function (response) {
-      console.log(response)
-    })
+    try {
+      axios.post('/todos', value).then(function (res) {
+        console.log(res.statusText)
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 

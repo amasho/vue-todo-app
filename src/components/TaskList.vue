@@ -15,35 +15,29 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import api from '@/api'
+import store, { mapState } from 'vuex'
 
 export default {
   name: 'TaskList',
   data () {
     return {
-      todoList: []
+      todoList: store.todos
     }
   },
   computed: {
-    ...mapState('todo', ['todos', 'showTodo']),
+    ...mapState(['todos', 'showTodo']),
     toggle: function () {
       if (this.showTodo === 'done') {
-        return this.todoList.filter(todos => todos.done === true)
+        return this.todos.filter(todos => todos.done === true)
       } else if (this.showTodo === 'inProgress') {
-        return this.todoList.filter(todos => todos.done === false)
+        return this.todos.filter(todos => todos.done === false)
       } else {
-        return this.todoList
+        return this.todos
       }
     }
   },
-  async created () {
-    try {
-      const res = await api.read()
-      this.todoList = res
-    } catch (e) {
-      console.log(e)
-    }
+  created () {
+    this.$store.dispatch('getTodos')
   }
 }
 </script>
