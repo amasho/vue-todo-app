@@ -14,7 +14,7 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'ToggleArea',
   methods: {
-    ...mapMutations('todo', ['changeShowTodo'])
+    ...mapMutations(['changeShowTodo'])
   }
 }
 </script>

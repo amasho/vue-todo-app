@@ -47,6 +47,10 @@ const store = new Vuex.Store({
           this.state.todos.splice(i, 1)
         }
       }
+    },
+    editTodo: function (ctx, value) {
+      delete value.editing
+      api.edit(value)
     }
   }
 })

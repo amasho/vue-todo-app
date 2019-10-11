@@ -1,13 +1,13 @@
 <template>
   <div class="task-list">
     <label
-      v-for="todo in toggle"
+      v-for="todo in todoList"
       :key="todo.id"
       class="task-list__item"
       :class="{ 'task-list__item--checked': todo.done }"
     >
       <input v-model="todo.done" type="checkbox" title="done" />
-      <input v-model="todo.editing" type="checkbox" title="edit" />
+      <input v-model="todo.editing" @change="todo.editing ? '' : editTodo(todo)" type="checkbox" title="edit" />
       <input v-if="todo.editing" v-model="todo.text" @keyup.enter="todo.editing = !todo.editing" />
       <span v-else>{{ todo.text }}</span>
     </label>
@@ -15,18 +15,14 @@
 </template>
 
 <script>
-import store, { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'TaskList',
-  data () {
-    return {
-      todoList: store.todos
-    }
-  },
+
   computed: {
     ...mapState(['todos', 'showTodo']),
-    toggle: function () {
+    todoList: function () {
       if (this.showTodo === 'done') {
         return this.todos.filter(todos => todos.done === true)
       } else if (this.showTodo === 'inProgress') {
@@ -34,6 +30,11 @@ export default {
       } else {
         return this.todos
       }
+    }
+  },
+  methods: {
+    editTodo (todo) {
+      this.$store.dispatch('editTodo', todo)
     }
   },
   created () {

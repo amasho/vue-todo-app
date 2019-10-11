@@ -28,6 +28,15 @@ const api = {
     } catch (e) {
       console.log(e)
     }
+  },
+  async edit (value) {
+    try {
+      axios.put('/todos/' + value.id, value).then(function (res) {
+        console.log(res.statusText)
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
