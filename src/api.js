@@ -19,6 +19,15 @@ const api = {
     } catch (e) {
       console.log(e)
     }
+  },
+  async remove (id) {
+    try {
+      axios.delete('/todos/' + id).then(function (res) {
+        console.log(res.statusText)
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 

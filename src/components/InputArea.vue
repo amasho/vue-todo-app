@@ -32,9 +32,12 @@ export default {
     this.$store.dispatch('getTodos')
   },
   methods: {
-    ...mapMutations(['input', 'removeTodo']),
+    ...mapMutations(['input']),
     addTodo () {
       this.$store.dispatch('addTodo')
+    },
+    removeTodo () {
+      this.$store.dispatch('removeTodo')
     }
   }
 }

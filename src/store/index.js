@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
     todos: [],
     newTodo: '',
     showTodo: 'all'
@@ -15,17 +14,8 @@ const store = new Vuex.Store({
     setTodos (state, todos) {
       state.todos = todos
     },
-    increment (state) {
-      state.count++
-      console.log(state.count)
-    },
     input: function (state, child) {
       state.newTodo = child
-    },
-    removeTodo: function (state) {
-      for (let i = state.todos.length - 1; i >= 0; i--) {
-        if (state.todos[i].done) state.todos.splice(i, 1)
-      }
     },
     changeShowTodo (state, e) {
       state.showTodo = e
@@ -49,6 +39,14 @@ const store = new Vuex.Store({
       this.state.todos.push(data)
       api.add(data)
       this.state.newTodo = ''
+    },
+    removeTodo: function (ctx) {
+      for (let i = this.state.todos.length - 1; i >= 0; i--) {
+        if (this.state.todos[i].done) {
+          api.remove(this.state.todos[i].id)
+          this.state.todos.splice(i, 1)
+        }
+      }
     }
   }
 })
