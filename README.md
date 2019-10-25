@@ -1,4 +1,4 @@
-# vue-todo-app
+# vuex-todo-app
 
 ## Project setup
 
