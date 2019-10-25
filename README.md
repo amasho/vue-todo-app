@@ -1,15 +1,31 @@
 # vue-todo-app
 
 ## Project setup
+
 ```
+npm install
+
+or
+
 yarn
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
+npm run serve
+
+or
+
 yarn serve
 ```
+
 ### Start API
+
 ```
-./node_modules/.bin/json-server --watch db.json
+npm run start-api
+
+or
+
+yarn start-api
 ```
