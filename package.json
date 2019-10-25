@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --host 127.0.0.1",
+    "start-api": "json-server --watch db.json",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
